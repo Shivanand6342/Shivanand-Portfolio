@@ -7,7 +7,16 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
+# Node modules and build output
+node_modules/
+dist
+dist-ssr
+*.local
+
+# Sensitive Auth & Firebase variables
+test-firebase.js
+.env
+.env.*
 dist
 dist-ssr
 *.local
