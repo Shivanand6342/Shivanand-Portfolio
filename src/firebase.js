@@ -62,6 +62,7 @@ export const getProfileData = async () => {
             if (aData.AboutTitle) firestoreData.aboutTitle = aData.AboutTitle;
             if (aData.Bio) firestoreData.bio = aData.Bio;
             if (aData.YearsOfExperience) firestoreData.yearsOfExperience = aData.YearsOfExperience;
+            if (aData.CVFilepath) firestoreData.cvFilepath = aData.CVFilepath;
         }
     } catch (error) {
         console.error("Error fetching profile:", error);
@@ -91,15 +92,19 @@ export const getProfileData = async () => {
  * @returns {Promise<string>} An accessible URL for the file.
  */
 export const getFileUrl = async (path) => {
-    if (!path) return "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
-    if (path.includes('image')) return "https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=2000&auto=format&fit=crop";
+    if (!path) return "#";
+
+    // Bypass Firebase Storage for externally hosted links or natively hosted public assets
+    if (path.startsWith('http') || path.startsWith('/')) {
+        return path;
+    }
 
     try {
         const fileRef = ref(storage, path);
         return await getDownloadURL(fileRef);
     } catch (error) {
         console.error("Error fetching file URL:", error);
-        return "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
+        return "#";
     }
 };
 
@@ -338,20 +343,20 @@ export const getContactData = async () => {
     try {
         const contactSnap = await getDoc(doc(db, 'Portfolio/Contact'));
         if (contactSnap.exists()) {
-            firestoreData = contactSnap.data();
+            firestoreData = contactSnap.data().ContactMe;
         }
     } catch (error) {
         console.error("Error fetching contact data:", error);
     }
 
     if (firestoreData) {
-        return firestoreData;
+        return {
+            headingLines: firestoreData.HeadingLines,
+            buttonTexts: {
+                primary: firestoreData.ButtonTexts.Primary,
+                secondary: firestoreData.ButtonTexts.Secondary
+            },
+            marqueeText: firestoreData.MarqueeText
+        };
     }
-
-    // Default static fallback structure
-    return {
-        headingLines: ["LET'S BUILD", "SOMETHING GREAT"],
-        buttonTexts: { primary: "GET IN TOUCH", secondary: "VIEW LINKEDIN" },
-        marqueeText: "SHIVANAND VISHWAKARMA * SENIOR SALESFORCE DEVELOPER * UP, INDIA * "
-    };
 };

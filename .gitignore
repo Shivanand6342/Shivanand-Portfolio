@@ -17,6 +17,10 @@ dist-ssr
 test-firebase.js
 .env
 .env.*
+
+# Development Caches
+.vite/
+.firebase/
 dist
 dist-ssr
 *.local
