@@ -37,7 +37,7 @@ const analytics = getAnalytics(app);
  */
 export const getProfileData = async () => {
     let firestoreData = {};
-    
+
     try {
         const [socialsSnap, desigSnap, aboutMeSnap] = await Promise.all([
             getDoc(doc(db, 'Portfolio/Socials')),
@@ -133,50 +133,28 @@ export const getMeasurableResultsData = async () => {
     let firestoreData = null;
 
     try {
-        const resultsSnap = await getDoc(doc(db, 'Portfolio/MeasurableResults'));
+        const resultsSnap = await getDoc(doc(db, 'Portfolio/MeasurableResult'));
         if (resultsSnap.exists()) {
-            firestoreData = resultsSnap.data().Results;
+            firestoreData = resultsSnap.data().MeasurableResults;
         }
     } catch (error) {
         console.error("Error fetching measurable results data:", error);
     }
 
     if (firestoreData && Array.isArray(firestoreData) && firestoreData.length > 0) {
-        return firestoreData;
-    }
+        let measurableResults = [];
 
-    return [
-        {
-            company: "INTENSEYE",
-            category: "Team Productivity",
-            stat: "+40%",
-            subtext: "Internal tooling automation"
-        },
-        {
-            company: "INTENSEYE",
-            category: "Bug Reduction",
-            stat: "-30%",
-            subtext: "Data-fetching bugs via React Query"
-        },
-        {
-            company: "INTENSEYE",
-            category: "POC Velocity",
-            stat: "Weeks → Days",
-            subtext: "AI-assisted development tools"
-        },
-        {
-            company: "INTENSEYE",
-            category: "Type Safety",
-            stat: "+20%",
-            subtext: "Advanced patterns & mentoring"
-        },
-        {
-            company: "LAYERMARK",
-            category: "Client Satisfaction",
-            stat: "+30%",
-            subtext: "Bridging technical/design gaps"
+        for (let i = 0; i < firestoreData.length; i++) {
+            measurableResults.push({
+                company: firestoreData[i].Company,
+                category: firestoreData[i].Category,
+                stat: firestoreData[i].Stat,
+                subtext: firestoreData[i].Subtext
+            });
         }
-    ];
+
+        return measurableResults;
+    }
 };
 
 /**
@@ -198,35 +176,21 @@ export const getTestimonialsData = async () => {
     }
 
     if (firestoreData && Array.isArray(firestoreData) && firestoreData.length > 0) {
-        return firestoreData;
-    }
+        let testimonialResults = [];
 
-    return [
-        {
-            id: "t1",
-            text: "Shivanand Vishwakarma is a dedicated developer with a strong technical background and a record of delivering high-quality work. He can tackle complex tasks using a systematic approach. One of his most appreciated strengths is his ability to quickly grasp the details of a given task by carefully considering its scope. Once he understands the essence of the work, he can deliver the desired development within a limited timeframe while thoroughly covering edge cases. He also makes a positive contribution to the company culture and collaborates effectively with his teammates. Hence, during the period we worked at the same company, I had the pleasure of working with him.",
-            name: "Poyraz Umut Hatipoğlu, PhD",
-            role: "Engineering Manager | Lead Computer Vision & AI Engineer",
-            relation: "Poyraz Umut worked with Shivanand Vishwakarma but on different teams",
-            date: "JANUARY 10, 2026"
-        },
-        {
-            id: "t2",
-            text: "Shivanand Vishwakarma is an incredibly intelligent Frontend Developer with a deep passion for learning every detail of the technology he uses. He has the rare ability to take on complex features and deliver them flawlessly from start to finish. The quality of his code is outstanding, reflecting both precision and best practices. Beyond his frontend expertise, he has a strong aptitude for software architecture and design, and I have no doubt he has a bright future ahead in this field. Working with Shivanand Vishwakarma has been a pleasure!",
-            name: "Ozge Gurleyen",
-            role: "Senior Frontend Developer",
-            relation: "Ozge worked with Shivanand Vishwakarma on the same team",
-            date: "FEBRUARY 25, 2025"
-        },
-        {
-            id: "t3",
-            text: "It was an absolute delight to collaborate with Shivanand Vishwakarma. His dedication to mastering frontend architecture and modern workflows directly impacted our productivity and code reliability. Shivanand Vishwakarma frequently steps up to tackle the most complicated, ambiguous tasks that others shy away from, bringing clarity and robust solutions every time. A true team player with remarkable problem-solving skills.",
-            name: "John Doe",
-            role: "Lead Software Architect",
-            relation: "John managed Shivanand Vishwakarma directly",
-            date: "MARCH 14, 2025"
+        for (let i = 0; i < firestoreData.length; i++) {
+            testimonialResults.push({
+                id: 't' + (i + 1),
+                text: firestoreData[i].Text,
+                name: firestoreData[i].Name,
+                role: firestoreData[i].Role,
+                relation: firestoreData[i].Relation,
+                date: firestoreData[i].Date
+            });
         }
-    ];
+
+        return testimonialResults;
+    }
 };
 
 /**
