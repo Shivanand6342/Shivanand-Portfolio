@@ -14,7 +14,6 @@ dist-ssr
 *.local
 
 # Sensitive Auth & Firebase variables
-src/firebase.js
 test-firebase.js
 .env
 .env.*
