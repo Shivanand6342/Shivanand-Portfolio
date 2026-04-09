@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Solid black background with slightly rounded corners -->
+  <rect width="100" height="100" rx="15" fill="#000000" />
+  <!-- Crisp 'SV' in your signature orange color -->
+  <text x="50" y="68" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-weight="900" font-size="50" fill="#ff5d00" text-anchor="middle">SV</text>
+</svg>
