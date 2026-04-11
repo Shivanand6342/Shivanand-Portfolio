@@ -6,14 +6,14 @@ import '@xyflow/react/dist/style.css';
 // Custom Main Node component (Profile)
 const MainNode = ({ data }) => {
     return (
-        <div className="p-4 flex flex-col items-center justify-center rounded-xl bg-[#111111] text-white shadow-[0_0_20px_rgba(249,115,22,0.6)] border-2 border-orange-500 transition-transform hover:scale-[1.02] cursor-pointer"
-            style={{ width: '200px' }}>
+        <div className="p-4 flex flex-col items-center justify-center rounded-xl bg-[#111111] text-white border-2 transition-transform hover:scale-[1.02] cursor-pointer"
+            style={{ width: '200px', borderColor: 'var(--theme-color)', boxShadow: '0 0 20px rgba(var(--theme-color-rgb), 0.6)' }}>
             <div className="w-10 h-10 rounded-full bg-[#1a1a1a] shadow-inner flex items-center justify-center border border-gray-800 shrink-0">
-                <User size={20} className="text-orange-500" />
+                <User size={20} style={{ color: 'var(--theme-color)' }} />
             </div>
-            <div className="font-bold text-lg text-orange-500 text-center tracking-wide leading-tight truncate w-full min-w-0 mt-3">{data.name}</div>
+            <div className="font-bold text-lg text-center tracking-wide leading-tight truncate w-full min-w-0 mt-3" style={{ color: 'var(--theme-color)' }}>{data.name}</div>
             <div className="text-[10px] text-gray-500 font-mono mt-2 shrink-0">Click to explore career</div>
-            <Handle type="source" position={Position.Bottom} style={{ background: '#f97316', width: '8px', height: '8px' }} />
+            <Handle type="source" position={Position.Bottom} style={{ background: 'var(--theme-color)', width: '8px', height: '8px' }} />
         </div>
     );
 };

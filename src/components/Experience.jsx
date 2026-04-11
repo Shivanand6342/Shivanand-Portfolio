@@ -29,7 +29,7 @@ const Experience = ({ profileData, experiences }) => {
 
                         {/* Title Section */}
                         <div className="mb-16">
-                            <div className="text-orange-500 font-bold text-xs tracking-[0.2em] mb-2 uppercase">Journey</div>
+                            <div className="font-bold text-xs tracking-[0.2em] mb-2 uppercase" style={{ color: 'var(--theme-color)' }}>Journey</div>
                             <h2 className="text-4xl font-extrabold text-white tracking-widest uppercase">Experience</h2>
                         </div>
 

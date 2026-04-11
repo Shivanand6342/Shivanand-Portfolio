@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { Github, Linkedin, Mail, Mountain } from 'lucide-react';
 
 const Header = ({ profileData }) => {
     const scrollToTop = () => {
@@ -13,24 +13,28 @@ const Header = ({ profileData }) => {
                 {/* Logo text instead of circle */}
                 <button
                     onClick={scrollToTop}
-                    className="flex-shrink-0 text-white font-extrabold text-2xl hover:text-orange-500 transition-colors tracking-widest"
+                    className="flex-shrink-0 text-white font-extrabold text-2xl hover:text-[var(--theme-color)] transition-colors tracking-widest"
                 >
                     SV
                 </button>
 
-                {/* Right Actions */}
+                {/* Right Actions — Order: LinkedIn, Trailhead, Github, Email */}
                 <div className="flex items-center space-x-6">
-                    {profileData?.github && (
-                        <a href={profileData.github} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
-                            <Github size={20} strokeWidth={1.5} />
-                        </a>
-                    )}
                     {profileData?.linkedin && (
                         <a href={profileData.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                             <Linkedin size={20} strokeWidth={1.5} />
                         </a>
                     )}
-                    {/* Using mail icon placeholder for contact/leetcode based on prompt image */}
+                    {profileData?.trailhead && (
+                        <a href={profileData.trailhead} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+                            <Mountain size={20} strokeWidth={1.5} />
+                        </a>
+                    )}
+                    {profileData?.github && (
+                        <a href={profileData.github} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+                            <Github size={20} strokeWidth={1.5} />
+                        </a>
+                    )}
                     {profileData?.email && (
                         <a href={`mailto:${profileData.email}`} className="text-gray-400 hover:text-white transition-colors">
                             <Mail size={20} strokeWidth={1.5} />

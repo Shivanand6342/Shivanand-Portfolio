@@ -7,7 +7,20 @@ import Contact from './components/Contact';
 import TechStack from './components/TechStack';
 import MeasurableResults from './components/MeasurableResults';
 import Testimonials from './components/Testimonials';
-import { getProfileData, getExperienceData, getFileUrl, getMeasurableResultsData, getTestimonialsData, getContactData } from './firebase';
+import { getProfileData, getExperienceData, getFileUrl, getMeasurableResultsData, getTestimonialsData, getContactData, getThemeConfig } from './firebase';
+
+/**
+ * Converts a hex color string (e.g. "#f97316") to an "R, G, B" string for rgba() usage.
+ * @param {string} hex
+ * @returns {string}
+ */
+const hexToRgb = (hex) => {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result
+        ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}`
+        : '249, 115, 22'; // fallback orange-500
+};
+
 /**
  * Root Application Component.
  * Orchestrates the loading of critical external data from Firebase and initializes the global layout structure.
@@ -29,6 +42,16 @@ function App() {
 
         const fetchData = async () => {
             try {
+                // 0. Theme Config — inject CSS custom properties before any component renders
+                const theme = await getThemeConfig();
+                const root = document.documentElement.style;
+                root.setProperty('--theme-color', theme.PrimaryColor);
+                root.setProperty('--theme-color-dark', theme.PrimaryColorDark);
+                root.setProperty('--theme-color-contact', theme.ContactBgColor);
+                root.setProperty('--theme-color-accent', theme.AccentColor);
+                root.setProperty('--theme-color-rgb', hexToRgb(theme.PrimaryColor));
+                root.setProperty('--theme-color-accent-rgb', hexToRgb(theme.AccentColor));
+
                 const profile = await getProfileData();
                 setProfileData(profile);
 
@@ -61,13 +84,13 @@ function App() {
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-950">
-                <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-orange-500 border-solid border-r-transparent"></div>
+                <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-[var(--theme-color)] border-solid border-r-transparent"></div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-gray-950 text-gray-100 font-sans selection:bg-orange-500/30 selection:text-orange-200 overflow-x-hidden">
+        <div className="min-h-screen bg-gray-950 text-gray-100 font-sans selection:bg-[var(--theme-color)]/30 selection:text-[var(--theme-color)] overflow-x-hidden">
             <Header profileData={profileData} />
 
             <main>
