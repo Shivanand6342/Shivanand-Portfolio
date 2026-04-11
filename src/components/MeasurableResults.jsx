@@ -15,7 +15,7 @@ const MeasurableResults = ({ resultsData = [] }) => {
       <div className="w-full px-4 md:px-8 mx-auto">
         {/* Header Section */}
         <div className="mb-12">
-            <span className="text-[#FF6B00] text-sm font-bold tracking-widest uppercase mb-2 block">IMPACT</span>
+            <span className="text-sm font-bold tracking-widest uppercase mb-2 block" style={{ color: 'var(--theme-color-accent)' }}>IMPACT</span>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-white mb-8">
                 MEASURABLE RESULTS
             </h2>
@@ -26,7 +26,7 @@ const MeasurableResults = ({ resultsData = [] }) => {
             {resultsData.map((result, index) => (
                 <div key={index} className="flex-1 bg-[#1A1A1A] relative p-6 lg:p-8 flex flex-col justify-between min-h-[320px] shadow-lg overflow-hidden shrink-1">
                     {/* Top Right Orange Square */}
-                    <div className="absolute top-0 right-0 w-12 h-12 bg-[#FF6B00]"></div>
+                    <div className="absolute top-0 right-0 w-12 h-12" style={{ backgroundColor: 'var(--theme-color-accent)' }}></div>
                     
                     {/* Top Content */}
                     <div>
@@ -36,11 +36,11 @@ const MeasurableResults = ({ resultsData = [] }) => {
 
                     {/* Middle / Large Stat */}
                     <div className="py-6">
-                        <p className="text-[#FF6B00] text-5xl xl:text-6xl font-extrabold whitespace-pre-line leading-tight">
+                        <p className="text-5xl xl:text-6xl font-extrabold whitespace-pre-line leading-tight" style={{ color: 'var(--theme-color-accent)' }}>
                             {result.stat && result.stat.includes('→') ? (
                                 <>
                                     {result.stat.split('→')[0].trim()}<br />
-                                    <span className="text-orange-500">→</span> {result.stat.split('→')[1].trim()}
+                                    <span style={{ color: 'var(--theme-color)' }}>→</span> {result.stat.split('→')[1].trim()}
                                 </>
                             ) : (
                                 result.stat

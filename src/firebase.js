@@ -20,6 +20,7 @@ const analytics = getAnalytics(app);
 
 // -----------------------------------------------------------------------------
 // Component Data Sequence (Ordered by Portfolio usage)
+// 0. Theme Config      -> getThemeConfig  (injected as CSS vars before render)
 // 1. Header & About    -> getProfileData
 // 2. Hero App-level    -> getFileUrl
 // 3. Hero Sub-level    -> getHeroMarqueeData
@@ -28,6 +29,34 @@ const analytics = getAnalytics(app);
 // 6. TechStack         -> getTechStackData, getCertificationsData
 // 7. Experience        -> getExperienceData
 // -----------------------------------------------------------------------------
+
+/**
+ * Fetches the dynamic theme color configuration from Firestore.
+ * Returns a palette object used to inject CSS custom properties at runtime,
+ * enabling live theme switching without code changes.
+ *
+ * @returns {Promise<Object>} Theme palette with PrimaryColor, PrimaryColorDark, ContactBgColor, AccentColor.
+ */
+export const getThemeConfig = async () => {
+    let themeConfig = null;
+    try {
+        const snap = await getDoc(doc(db, 'Portfolio/ThemeConfig'));
+        if (snap.exists()) {
+            themeConfig = snap.data();
+        }
+    } catch (error) {
+        console.error("Error fetching theme config:", error);
+    }
+
+    console.log('theme config: ', themeConfig);
+
+    return {
+        PrimaryColor: themeConfig?.PrimaryColor || '#f97316',
+        PrimaryColorDark: themeConfig?.PrimaryColorDark || '#ea580c',
+        ContactBgColor: themeConfig?.ContactBgColor || '#ff5d00',
+        AccentColor: themeConfig?.AccentColor || '#FF6B00'
+    };
+};
 
 /**
  * Fetches the user profile data including socials, designation, and bio.
@@ -50,6 +79,7 @@ export const getProfileData = async () => {
             if (sData.GitHub) firestoreData.github = sData.GitHub;
             if (sData.LinkedIn) firestoreData.linkedin = sData.LinkedIn;
             if (sData.Gmail) firestoreData.email = sData.Gmail;
+            if (sData.Trailhead) firestoreData.trailhead = sData.Trailhead;
         }
 
         if (desigSnap.exists()) {

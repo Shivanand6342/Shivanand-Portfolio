@@ -26,9 +26,10 @@ const Hero = ({ profileData, cvUrl }) => {
         fetchMarquee();
     }, []);
 
-    // Map scroll position [0px, 400px] to opacity [1, 0] and Y [0px, -150px]
+    // Map scroll position [0px, 400px] to opacity [1, 0], Y [0px, -150px], and scale [1, 0.7]
     const opacity = useTransform(scrollY, [0, 400], [1, 0]);
     const y = useTransform(scrollY, [0, 400], [0, -150]);
+    const scale = useTransform(scrollY, [0, 400], [1, 0.8]);
 
     const particlesInit = useCallback(async (engine) => {
         await loadSlim(engine);
@@ -116,20 +117,19 @@ const Hero = ({ profileData, cvUrl }) => {
 
                 {/* Hero Content */}
                 <motion.div
-                    style={{ opacity, y }}
+                    style={{ opacity, y, scale }}
                     className="relative z-10 text-center px-4 w-full"
                 >
 
-                    {/* Outlined Name with Strikethrough relative container */}
+                    {/* Name with gradient stroke effect */}
                     <div className="relative inline-block mb-10">
-                        <h1 className="text-[10vw] md:text-[160px] font-black uppercase tracking-wider text-outline-gray select-none leading-none">
+                        <h1 className="text-[10vw] md:text-[160px] font-black uppercase tracking-wider text-gradient-stroke select-none leading-none">
                             {profileData?.name || "SHIVANAND"}
                         </h1>
-                        {/* The striking orange line */}
-                        <div className="absolute top-1/2 left-0 w-full h-1 md:h-2 bg-orange-500 transform -translate-y-1/2 rounded-full shadow-[0_0_20px_rgba(249,115,22,0.6)]"></div>
                     </div>
 
-                    <h2 className="text-xl md:text-4xl font-mono text-orange-500 uppercase tracking-widest mb-16 font-semibold shadow-orange-500/20 drop-shadow-md">
+                    <h2 className="text-xl md:text-4xl font-mono uppercase tracking-widest mb-16 font-semibold drop-shadow-md"
+                        style={{ color: 'var(--theme-color)' }}>
                         {profileData?.tagline || "SALESFORCE/SFCC DEVELOPER"}
                     </h2>
 
@@ -137,7 +137,7 @@ const Hero = ({ profileData, cvUrl }) => {
                     <div className="flex justify-center">
                         <button
                             onClick={downloadCv}
-                            className="group flex items-center gap-2 px-8 py-3 outline outline-1 outline-gray-700 hover:outline-orange-500 text-gray-300 hover:text-orange-400 font-mono tracking-wider transition-all duration-300"
+                            className="group flex items-center gap-2 px-8 py-3 outline outline-1 outline-gray-700 hover:outline-[var(--theme-color)] text-gray-300 hover:text-[var(--theme-color)] font-mono tracking-wider transition-all duration-300"
                         >
                             <Download size={18} className="group-hover:-translate-y-1 transition-transform" />
                             <span>DOWNLOAD CV</span>
@@ -150,8 +150,8 @@ const Hero = ({ profileData, cvUrl }) => {
             {marqueeItems.length > 0 && (
                 <div className="relative w-full z-30 mt-[-3vw] filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)]">
                     <div
-                        className="w-full bg-[#f97316] flex whitespace-nowrap overflow-hidden"
-                        style={{ clipPath: "polygon(0 4vw, 100% 20%, 100% 100%, 0 100%)", paddingTop: "5vw", paddingBottom: "1.5vw" }}
+                        className="w-full flex whitespace-nowrap overflow-hidden"
+                        style={{ backgroundColor: 'var(--theme-color)', clipPath: "polygon(0 4vw, 100% 20%, 100% 100%, 0 100%)", paddingTop: "5vw", paddingBottom: "1.5vw" }}
                     >
                         {/* Wrapper to tilt the text upwards on the right side */}
                         <div className="flex w-full" style={{ transform: "rotate(-1deg) translateY(-0.5vw)" }}>
