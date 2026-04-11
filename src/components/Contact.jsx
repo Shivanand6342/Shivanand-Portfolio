@@ -18,7 +18,7 @@ const Contact = ({ profileData, contactData }) => {
     return (
         <section id="contact" className="w-full relative flex flex-col">
             {/* Top Orange Section */}
-            <div className="bg-[#ff5d00] py-32 px-4 flex flex-col items-center justify-center text-center">
+            <div className="py-32 px-4 flex flex-col items-center justify-center text-center" style={{ backgroundColor: 'var(--theme-color-contact)' }}>
                 <h2 className="text-[12vw] sm:text-[8vw] md:text-8xl font-black text-black leading-[0.9] tracking-tighter uppercase font-sans mb-12 flex flex-col items-center">
                     {contactData?.headingLines?.map((line, index) => (
                         <span key={index}>{line}</span>
@@ -72,7 +72,7 @@ const Contact = ({ profileData, contactData }) => {
                 </div>
             </div>
 
-            <style jsx>{`
+            <style>{`
                 @keyframes marquee {
                     0% { transform: translateX(0%); }
                     100% { transform: translateX(-100%); }

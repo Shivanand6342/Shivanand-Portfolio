@@ -82,13 +82,13 @@ const About = ({ profileData }) => {
             {/* Adjusted padding to reduce space on the left side (closer to center divider) and increase space on right side */}
             <div className="w-full md:w-1/2 bg-[#050505] flex flex-col justify-center py-12 px-8 md:py-24 md:pl-12 md:pr-12 lg:py-32 lg:pl-16 lg:pr-24 xl:py-40 xl:pl-24 xl:pr-48">
                 <div className="max-w-[700px] w-full mr-auto">
-                    <div className="text-orange-500 font-bold text-xs md:text-sm uppercase tracking-[0.2em] mb-6">
+                    <div className="font-bold text-xs md:text-sm uppercase tracking-[0.2em] mb-6" style={{ color: 'var(--theme-color)' }}>
                         ABOUT
                     </div>
 
                     <h2 className="text-4xl lg:text-5xl xl:text-6xl font-black text-white uppercase tracking-wider mb-12 drop-shadow-md leading-[1.1] whitespace-nowrap">
                         THE<br />
-                        <span className="text-orange-500">'WHY'</span><br />
+                        <span style={{ color: 'var(--theme-color)' }}>'WHY'</span><br />
                         BEHIND WHO I AM
                     </h2>
 

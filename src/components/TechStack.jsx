@@ -17,7 +17,11 @@ const TechBadge = ({ item }) => {
     return (
         <div className="flex items-center gap-2 group cursor-default">
             {/* Minimalist square icon block */}
-            <div className="w-8 h-8 rounded bg-[#111] border border-[#222] flex items-center justify-center text-orange-500 group-hover:bg-orange-500 group-hover:text-black group-hover:border-orange-400 transition-all duration-300">
+            <div className="w-8 h-8 rounded bg-[#111] border border-[#222] flex items-center justify-center transition-all duration-300"
+                style={{ color: 'var(--theme-color)' }}
+                onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--theme-color)'; e.currentTarget.style.color = 'black'; e.currentTarget.style.borderColor = 'var(--theme-color)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = ''; e.currentTarget.style.color = 'var(--theme-color)'; e.currentTarget.style.borderColor = '#222'; }}
+            >
                 <IconComponent size={16} strokeWidth={2.5} />
             </div>
             {/* Tech Name Text */}
@@ -58,7 +62,7 @@ const TechStack = () => {
                     <div className="lg:col-span-7">
                         {/* Title Section */}
                         <div className="mb-12">
-                            <p className="text-orange-500 font-mono text-[10px] sm:text-xs tracking-[0.2em] mb-2 uppercase font-bold">Technologies</p>
+                            <p className="font-mono text-[10px] sm:text-xs tracking-[0.2em] mb-2 uppercase font-bold" style={{ color: 'var(--theme-color)' }}>Technologies</p>
                             <h2 className="text-5xl md:text-[80px] font-black uppercase tracking-tight text-white leading-none">
                                 STACK & CODE
                             </h2>
@@ -68,7 +72,7 @@ const TechStack = () => {
                         <div className="flex flex-col">
                             {techCategories.map((category, index) => (
                                 <div key={category.category} className="border-b border-[#1a1a1a] py-8 first:pt-0 last:border-0">
-                                    <h3 className="text-2xl md:text-3xl font-black text-orange-500 mb-6 uppercase tracking-wider">
+                                    <h3 className="text-2xl md:text-3xl font-black mb-6 uppercase tracking-wider" style={{ color: 'var(--theme-color)' }}>
                                         {category.category}
                                     </h3>
                                     <div className="flex flex-wrap gap-x-8 gap-y-5">
@@ -85,8 +89,8 @@ const TechStack = () => {
                     {/* CENTER DIVIDER (Hidden on mobile) */}
                     <div className="hidden lg:flex lg:col-span-1 justify-center">
                         <div className="w-[4px] bg-[#111] h-full relative rounded-full">
-                            {/* The active orange indicator line acting like a scroll progress or accent line */}
-                            <div className="absolute top-0 left-0 w-full h-32 bg-orange-600 rounded-full"></div>
+                            {/* The active indicator line acting like a scroll progress or accent line */}
+                            <div className="absolute top-0 left-0 w-full h-32 rounded-full" style={{ backgroundColor: 'var(--theme-color-dark)' }}></div>
                         </div>
                     </div>
 
@@ -97,7 +101,7 @@ const TechStack = () => {
                             {/* Parallel faded title */}
                             <div className="mb-12">
                                 <h2 className="text-5xl md:text-[80px] font-black uppercase tracking-tight text-[#333] leading-none">
-                                    LATEST<span className="text-orange-600">.</span>
+                                    LATEST<span style={{ color: 'var(--theme-color-dark)' }}>.</span>
                                 </h2>
                             </div>
 
@@ -106,12 +110,12 @@ const TechStack = () => {
                                 {/* Box Header */}
                                 <div className="flex items-center justify-between mb-8 border-b border-[#1a1a1a] pb-4">
                                     <div className="flex items-center gap-3">
-                                        <Icons.Award className="text-orange-500" size={24} />
+                                        <Icons.Award style={{ color: 'var(--theme-color)' }} size={24} />
                                         <span className="text-white font-black uppercase tracking-widest text-xl">CERTIFICATIONS</span>
                                     </div>
                                     <div className="flex items-center gap-2 px-2 py-1 bg-[#1a1a1a] rounded border border-[#333]">
-                                        <div className="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></div>
-                                        <span className="text-orange-500 text-[10px] font-mono tracking-wider font-bold">VERIFIED</span>
+                                        <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: 'var(--theme-color)' }}></div>
+                                        <span className="text-[10px] font-mono tracking-wider font-bold" style={{ color: 'var(--theme-color)' }}>VERIFIED</span>
                                     </div>
                                 </div>
 
@@ -127,12 +131,16 @@ const TechStack = () => {
                                         >
                                             <div className="flex items-start gap-3">
                                                 {/* Status Icon */}
-                                                <div className="mt-1 flex-shrink-0 text-orange-600">
+                                                <div className="mt-1 flex-shrink-0" style={{ color: 'var(--theme-color-dark)' }}>
                                                     <Icons.ShieldCheck size={16} />
                                                 </div>
                                                 {/* Text Content */}
                                                 <div className="flex flex-col">
-                                                    <span className="text-gray-300 font-mono text-sm leading-tight max-w-[250px] group-hover:text-orange-400 transition-colors">
+                                                    <span className="text-gray-300 font-mono text-sm leading-tight max-w-[250px] transition-colors"
+                                                        style={{ '--hover-color': 'var(--theme-color)' }}
+                                                        onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--theme-color)'; }}
+                                                        onMouseLeave={(e) => { e.currentTarget.style.color = ''; }}
+                                                    >
                                                         {cert.name.toUpperCase()}
                                                     </span>
                                                 </div>
@@ -142,7 +150,8 @@ const TechStack = () => {
                                                 <span className="text-[#555] text-xs font-mono font-bold tracking-wider">
                                                     {formatDate(cert.date)}
                                                 </span>
-                                                <Icons.ArrowUpRight size={14} className="ml-2 text-gray-700 opacity-0 group-hover:opacity-100 group-hover:text-orange-500 transition-all -translate-y-1 translate-x-1" />
+                                                <Icons.ArrowUpRight size={14} className="ml-2 text-gray-700 opacity-0 group-hover:opacity-100 transition-all -translate-y-1 translate-x-1"
+                                                    style={{ color: 'var(--theme-color)' }} />
                                             </div>
                                         </a>
                                     ))}

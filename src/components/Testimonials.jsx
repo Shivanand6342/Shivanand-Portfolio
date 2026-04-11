@@ -91,14 +91,14 @@ const Testimonials = ({ testimonials = [] }) => {
                 {/* Header Section */}
                 <div className="mb-12 flex justify-between items-end">
                     <div>
-                        <span className="text-[#FF6B00] text-sm font-bold tracking-widest uppercase mb-2 block">TESTIMONIALS</span>
+                        <span className="text-sm font-bold tracking-widest uppercase mb-2 block" style={{ color: 'var(--theme-color-accent)' }}>TESTIMONIALS</span>
                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-white mb-6">
                             WHAT PEOPLE SAY
                         </h2>
                         
-                        <div className="inline-flex items-center gap-2 border border-[#FF6B00] px-3 py-1.5 rounded-sm">
-                            <User size={14} className="text-[#FF6B00]"/>
-                            <span className="text-[#FF6B00] text-xs font-semibold tracking-wider uppercase">
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-sm" style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: 'var(--theme-color-accent)' }}>
+                            <User size={14} style={{ color: 'var(--theme-color-accent)' }}/>
+                            <span className="text-xs font-semibold tracking-wider uppercase" style={{ color: 'var(--theme-color-accent)' }}>
                                 Sourced from LinkedIn Recommendations
                             </span>
                         </div>
@@ -109,13 +109,18 @@ const Testimonials = ({ testimonials = [] }) => {
                         <div className="hidden md:flex gap-4">
                             <button 
                                 onClick={prevSlide}
-                                className="w-12 h-12 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 hover:text-white hover:border-[#FF6B00] hover:bg-[#FF6B00]/10 transition-all focus:outline-none"
+                                className="w-12 h-12 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 hover:text-white transition-all focus:outline-none"
+                                style={{ '--btn-accent': 'var(--theme-color-accent)' }}
+                                onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--theme-color-accent)'; e.currentTarget.style.backgroundColor = 'rgba(var(--theme-color-accent-rgb), 0.1)'; }}
+                                onMouseLeave={(e) => { e.currentTarget.style.borderColor = ''; e.currentTarget.style.backgroundColor = ''; }}
                             >
                                 <ChevronLeft size={24} />
                             </button>
                             <button 
                                 onClick={nextSlide}
-                                className="w-12 h-12 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 hover:text-white hover:border-[#FF6B00] hover:bg-[#FF6B00]/10 transition-all focus:outline-none"
+                                className="w-12 h-12 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 hover:text-white transition-all focus:outline-none"
+                                onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--theme-color-accent)'; e.currentTarget.style.backgroundColor = 'rgba(var(--theme-color-accent-rgb), 0.1)'; }}
+                                onMouseLeave={(e) => { e.currentTarget.style.borderColor = ''; e.currentTarget.style.backgroundColor = ''; }}
                             >
                                 <ChevronRight size={24} />
                             </button>
@@ -148,7 +153,8 @@ const Testimonials = ({ testimonials = [] }) => {
                                 className="px-3"
                                 style={{ flex: `0 0 ${100 / visibleCount}%` }}
                             >
-                                <div className="bg-[#0f0f0f] border-l-4 border-l-[#FF6B00] p-8 lg:p-10 flex flex-col justify-between h-full relative rounded-r-md min-h-[450px]">
+                                <div className="bg-[#0f0f0f] p-8 lg:p-10 flex flex-col justify-between h-full relative rounded-r-md min-h-[450px]"
+                                    style={{ borderLeft: `4px solid var(--theme-color-accent)` }}>
                                     {/* Top Badge & Quote Icon */}
                                     <div className="flex justify-between items-start mb-8 text-gray-400">
                                         <div className="flex items-center gap-2 uppercase tracking-wide text-xs font-bold">
@@ -171,7 +177,7 @@ const Testimonials = ({ testimonials = [] }) => {
                                     {/* Person Details */}
                                     <div>
                                         <h4 className="text-white font-bold text-xl mb-1">{t.name}</h4>
-                                        <p className="text-[#FF6B00] text-sm font-semibold mb-2">{t.role}</p>
+                                        <p className="text-sm font-semibold mb-2" style={{ color: 'var(--theme-color-accent)' }}>{t.role}</p>
                                         <p className="text-gray-500 text-xs mb-3 italic">{t.relation}</p>
                                         <p className="text-gray-600 text-[10px] uppercase tracking-widest font-bold">{t.date}</p>
                                     </div>
@@ -186,13 +192,13 @@ const Testimonials = ({ testimonials = [] }) => {
                     <div className="flex justify-center gap-6 mt-8 md:hidden">
                         <button 
                             onClick={prevSlide}
-                            className="w-14 h-14 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 active:text-white active:border-[#FF6B00] active:bg-[#FF6B00]/10 transition-all focus:outline-none"
+                            className="w-14 h-14 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 transition-all focus:outline-none"
                         >
                             <ChevronLeft size={28} />
                         </button>
                         <button 
                             onClick={nextSlide}
-                            className="w-14 h-14 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 active:text-white active:border-[#FF6B00] active:bg-[#FF6B00]/10 transition-all focus:outline-none"
+                            className="w-14 h-14 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 transition-all focus:outline-none"
                         >
                             <ChevronRight size={28} />
                         </button>

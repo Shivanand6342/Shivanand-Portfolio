@@ -1,10 +1,19 @@
 @import "tailwindcss";
 
+/* ─── Dynamic Theme Color Defaults (overridden at runtime by Firebase) ─── */
+:root {
+  --theme-color: #f97316;
+  --theme-color-dark: #ea580c;
+  --theme-color-contact: #ff5d00;
+  --theme-color-accent: #FF6B00;
+  /* RGB variants for use in rgba() / shadow contexts */
+  --theme-color-rgb: 249, 115, 22;
+  --theme-color-accent-rgb: 255, 107, 0;
+}
+
 @theme {
-  --color-primary-500: #f97316;
-  /* Orange-500 */
-  --color-primary-600: #ea580c;
-  /* Orange-600 */
+  --color-primary-500: var(--theme-color);
+  --color-primary-600: var(--theme-color-dark);
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -28,9 +37,11 @@ body {
 }
 
 @layer utilities {
-  .text-outline-gray {
-    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.6);
+  /* Clean white outlined stroke with subtle theme-color glow */
+  .text-gradient-stroke {
     -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.6);
+    filter: drop-shadow(0 0 30px rgba(var(--theme-color-rgb), 0.25));
   }
 }
 
@@ -58,6 +69,5 @@ code {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #f97316;
-  /* Tailwind orange-500 */
+  background: var(--theme-color);
 }
